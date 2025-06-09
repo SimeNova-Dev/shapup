@@ -1,0 +1,31 @@
+#!/bin/bash
+# Test script for React Native import resolution
+
+echo "=== React Native Import Resolution Test ==="
+echo ""
+echo "1. Starting Expo development server..."
+npx expo start --clear
+
+echo ""
+echo "2. Check the console output for:"
+echo "   - '=== Import Debug Info ===' section"
+echo "   - Component types should be 'function'"
+echo "   - Component names should be correct"
+echo ""
+echo "3. Look for any 'Invalid value for component' errors"
+echo ""
+echo "4. If components render correctly in the simplified test,"
+echo "   then the issue is specifically with React Navigation"
+echo ""
+echo "5. Expected working behavior:"
+echo "   - WorkoutScreen should render with blue background"
+echo "   - No console errors about invalid components"
+echo "   - Direct component rendering works"
+echo ""
+echo "=== Debugging Steps ==="
+echo "If you still see import issues:"
+echo "1. Check Metro bundler cache: npx expo start --clear"
+echo "2. Check if components are functions: console shows 'function'"
+echo "3. Try different file extensions: .jsx vs .tsx"
+echo "4. Verify React/React Navigation versions compatibility"
+echo ""

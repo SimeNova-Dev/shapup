@@ -1,41 +1,67 @@
 import { StatusBar } from 'expo-status-bar';
-import { Text, View } from 'react-native';
+import { Text, View} from 'react-native';
+import React from 'react';
 import "./global.css";
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { NavigationContainer } from '@react-navigation/native';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import Ionicons from '@expo/vector-icons/Ionicons';
+// Working imports with .jsx extensions
+import WorkoutScreen from './src/Screens/WorkoutScreen.jsx';
+import TimerScreen from './src/Screens/TimerScreen.jsx';
+import CalculationScreen from './src/Screens/CalculationScreen.jsx';
+
+const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
-    <View className="flex-1 items-center justify-center bg-purple-600 p-6">
-      <View className="bg-orange-500 p-8 rounded-xl mb-6 shadow-lg">
-        <Text className="text-3xl font-bold text-white text-center">
-          🎨 NativeWind Colors
-        </Text>
-      </View>
-      
-      <View className="bg-pink-400 p-6 rounded-lg mb-4 w-80">
-        <Text className="text-xl font-semibold text-white text-center">
-          Pink Background
-        </Text>
-      </View>
-      
-      <View className="bg-cyan-500 p-6 rounded-lg mb-4 w-80">
-        <Text className="text-xl font-semibold text-gray-900 text-center">
-          Cyan Background
-        </Text>
-      </View>
-      
-      <View className="bg-yellow-400 p-6 rounded-lg mb-4 w-80">
-        <Text className="text-xl font-semibold text-gray-800 text-center">
-          Yellow Background
-        </Text>
-      </View>
-      
-      <View className="bg-emerald-600 p-6 rounded-lg w-80">
-        <Text className="text-xl font-semibold text-white text-center">
-          Emerald Background
-        </Text>
-      </View>
-      
-      <StatusBar style="light" />
-    </View>
+    <NavigationContainer>
+      <Tab.Navigator 
+        screenOptions={({ route }) => ({
+          tabBarHideOnKeyboard: true,
+          tabBarIcon : ({ color, size }) => {
+            switch (route.name) {
+              case 'Workout':
+                return (<MaterialCommunityIcons 
+                  name="dumbbell" 
+                  size={size} 
+                  color={color} 
+                  />
+                );
+              case 'Timer':
+                return (<Ionicons
+                  name="timer-outline"
+                  size={size}
+                  color={color}
+                  />
+                );
+              case 'Calculator':
+                return (<Ionicons
+                  name="calculator-outline"
+                  size={size}
+                  color={color}
+                  />
+                );
+              default:
+                return null;
+            }
+          },
+        tabBarShowLabel: false,
+        headerShown: false,
+        tabBarStyle: { 
+          backgroundColor: "black",
+          borderTopLeftRadius: 20,
+          borderTopRightRadius: 20,
+          paddingVertical: 5,
+        },
+        tabBarActiveTintColor: "aqua",
+        tabBarInactiveTintColor: "gray",
+        })}
+        >
+        <Tab.Screen name="Workout" component={WorkoutScreen} />
+        <Tab.Screen name="Timer" component={TimerScreen} />
+        <Tab.Screen name="Calculator" component={CalculationScreen} />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 }
